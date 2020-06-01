@@ -1,12 +1,12 @@
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://sonkk:pwd@clustersgp-tj3gl.mongodb.net/storeonline";
-var ProductDAO = {
-  insert: function (product) {
+var url = "mongodb+srv://kanghy:0979320779Qwe@cluster0-9lfpr.mongodb.net/dbSEP";
+var ProductsDAO = {
+  insert: function (products) {
     return new Promise(function (resolve, reject) {
       MongoClient.connect(url, function (err, db) {
         if (err) throw err;
-        var dbo = db.db("storeonline");
-        dbo.collection("products").insertOne(product, function (err, res) {
+        var dbo = db.db("dbSEP");
+        dbo.collection("products").insertOne(products, function (err, res) {
           if (err) return reject(err);
           resolve(res.insertedCount > 0 ? true : false);
           db.close();
@@ -18,7 +18,7 @@ var ProductDAO = {
     return new Promise(function (resolve, reject) {
       MongoClient.connect(url, function (err, db) {
         if (err) throw err;
-        var dbo = db.db("storeonline");
+        var dbo = db.db("dbSEP");
         var query = {};
         dbo.collection("products").find(query).toArray(function (err, res) {
           if (err) return reject(err);
@@ -32,7 +32,7 @@ var ProductDAO = {
     return new Promise(function (resolve, reject) {
       MongoClient.connect(url, function (err, db) {
         if (err) throw err;
-        var dbo = db.db("storeonline");
+        var dbo = db.db("dbSEP");
         var ObjectId = require('mongodb').ObjectId;
         var query = { _id: ObjectId(id) };
         dbo.collection("products").findOne(query, function (err, res) {
@@ -44,4 +44,4 @@ var ProductDAO = {
     });
   }
 };
-module.exports = ProductDAO;
+module.exports = ProductsDAO;

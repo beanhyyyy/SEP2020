@@ -4,7 +4,8 @@ var router = express.Router();
 var multer = require('multer');
 var upload = multer({});
 // daos
-var ProductDAO = require('../daos/ProductDAO.js');
+var CustomersDAO = require('../daos/CustomersDAO.js');
+var ProductsDAO = require('../daos/ProductsDAO.js');
 var AdminDAO = require('../daos/AdminDAO.js');
 var OrderDAO = require('../daos/OrderDAO.js');
 // routes
@@ -36,17 +37,57 @@ router.get('/home', function (req, res) {
   }
 });
 
-router.get('/addproduct', function (req, res) {
-  res.render('admin/addproduct.ejs');
+router.get('/addCustomers', function (req, res) {
+  res.render('admin/addCustomers.ejs');
 });
 
-router.post('/addproduct', upload.single('fileImage'), async function (req, res) {
+router.post('/addCustomers', upload.single('fileImage'), async function (req, res) {
   var name = req.body.txtName;
-  var price = parseInt(req.body.txtPrice);
+  var phone = parseInt(req.body.txtPhone);
+  var gmail = req.body.txtGmail;
+
   if (req.file) {
     var image = req.file.buffer.toString('base64');
-    var product = { name: name, price: price, image: image };
-    var result = await ProductDAO.insert(product);
+    var customers = { name: name, phone: phone, gmail: gmail, image: image };
+    var result = await CustomersDAO.insert(customers);
+    if (result) {
+      res.send('OK BABY!');
+    } else {
+      res.send('SORRY BABY!');
+    }
+  } else {
+    var customers = { name: name, phone: phone, gmail: gmail };
+    var result = await CustomersDAO.insert(customers);
+    if (result) {
+      res.send('OK BABY!');
+    } else {
+      res.send('SORRY BABY!');
+    }
+  }
+});
+
+router.get('/addProducts', function (req, res) {
+  res.render('admin/addProducts.ejs');
+});
+
+router.post('/addProducts', upload.single('fileImage'), async function (req, res) {
+  var name = req.body.txtName;
+  var phone = parseInt(req.body.txtPhone);
+  var description = req.body.txtDescription;
+  var slot = parseInt(req.body.txtSlot);
+
+  if (req.file) {
+    var image = req.file.buffer.toString('base64');
+    var products = { name: name, phone: phone, description: description, slot: slot, image: image};
+    var result = await ProductsDAO.insert(products);
+    if (result) {
+      res.send('OK BABY!');
+    } else {
+      res.send('SORRY BABY!');
+    }
+  } else {
+    var products = { name: name, phone: phone, description: description, slot: slot, image: image};
+    var result = await ProductsDAO.insert(products);
     if (result) {
       res.send('OK BABY!');
     } else {

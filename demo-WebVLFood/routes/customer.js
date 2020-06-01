@@ -1,24 +1,24 @@
 var express = require('express');
 var router = express.Router();
 // daos
-var ProductDAO = require('../daos/ProductDAO.js');
+var ProductsDAO = require('../daos/ProductsDAO.js');
 var OrderDAO = require('../daos/OrderDAO.js');
 // routes
 router.get('/', function (req, res) {
   res.redirect('/home');
 });
 router.get('/home', async function (req, res) {
-  var products = await ProductDAO.getAll();
+  var products = await ProductsDAO.getAll();
   res.render('customer/home.ejs', { products: products });
 });
-router.get('/viewproduct/:id', async function (req, res) {
+router.get('/viewproducts/:id', async function (req, res) {
   var id = req.params.id;
-  var product = await ProductDAO.getDetails(id);
-  res.render('customer/viewproduct.ejs', { product: product });
+  var products = await ProductsDAO.getDetails(id);
+  res.render('customer/viewproducts.ejs', { products: products });
 });
 router.post('/add2cart', async function (req, res) {
   var id = req.body.txtID;
-  var product = await ProductDAO.getDetails(id);
+  var products = await ProductsDAO.getDetails(id);
   var quantity = parseInt(req.body.txtQuantity);
   // create empty mycart
   var mycart = [];
@@ -27,9 +27,9 @@ router.post('/add2cart', async function (req, res) {
     mycart = req.session.mycart;
   }
   // check exist product from mycart
-  var index = mycart.findIndex(x => x.product._id == id);
+  var index = mycart.findIndex(x => x.products._id == id);
   if (index == -1) {
-    var newItem = { product: product, quantity: quantity };
+    var newItem = { products: products, quantity: quantity };
     mycart.push(newItem);
   } else {
     mycart[index].quantity += quantity;
@@ -54,7 +54,7 @@ router.get('/remove2cart/:id', function (req, res) {
   var id = req.params.id;
   if (req.session.mycart) {
     var mycart = req.session.mycart;
-    var index = mycart.findIndex(x => x.product._id == id);
+    var index = mycart.findIndex(x => x.products._id == id);
     if (index != -1) { // found, remove item
       mycart.splice(index, 1);
       req.session.mycart = mycart;
@@ -75,7 +75,7 @@ router.post('/checkout', async function (req, res) {
   var now = new Date().getTime(); // milliseconds
   var total = 0;
   for (var item of req.session.mycart) {
-    total += item.product.price * item.quantity;
+    total += item.products.price * item.quantity;
   }
   var order = { custName: custName, custPhone: custPhone, datetime: now, 
     items: req.session.mycart, total: total, status: 'PENDING'};
