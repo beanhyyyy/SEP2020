@@ -1,28 +1,16 @@
 <html>
+
   <body>
-    <h2 align="center">PRODUCTS HOME</h2>
-    <h3 align="center"><a href="/mycart">My cart</a> have <%= (session.mycart) ? session.mycart.length : 0 %> items</h3>
-    <table align="center">
-      <% var nCols = 3;
-      var nRows = Math.ceil(products.length / nCols);
-      for (var r = 0; r < nRows; r++) { %>
-      <tr>
-        <% for (var c = 0; c < nCols; c++) { 
-            if (r * nCols + c < products.length) {
-              var products = products[r * nCols + c];
-        %>
-        <td align="center">
-          <a href="/viewproducts/<%= products._id %>">
-            <img src="data:image/jpg;base64,<%= products.image %>" width="300" height="300" /><br/>
-          </a>
-          <%= products.name %><br/>
-          <%= products.phone %><br/>
-          <%= products.description %><br/>
-          <%= products.slot %><br/>
-        </td>
-        <% }  } %>
-      </tr>
-      <% } %>
-    </table>
+  <h1>TRANG CHU</h1>
+  <ul>
+    <li><a href="/customer/viewProducts">View Products</a></li>
+    <li><a href="/customer/addCustomers">Add Customer</a></li>
+    <li><a href="/customer/addFeedbacks">Add Feedback</a></li>
+    <li><a href="/customer/viewTeams">View Teams</a></li>
+  </ul>
   </body>
+
+  
+
+  
 </html>

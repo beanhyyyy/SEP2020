@@ -5,7 +5,7 @@ app.listen(process.env.PORT || 3000);
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 var session = require('express-session');
-app.use(session({ secret: "sonkk@123" }));
+app.use(session({ secret: "kanghy@123" }));
 // this middleware makes templates accessible session variables
 app.use(function (req, res, next) {
   res.locals.session = req.session;

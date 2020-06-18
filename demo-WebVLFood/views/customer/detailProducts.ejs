@@ -1,0 +1,25 @@
+<html>
+
+<body>
+  <h2>products DETAILS</h2>
+  <table>
+    <tr>
+      <td>
+        <img src="data:image/jpg;base64,<%= products.image %>" width="400" height="400" />
+      </td>
+      <td>
+        
+        Name: <%= products.name %><br />
+        Phone: <%= products.phone %><br />
+        Description: <%= products.description %><br />
+        <form action="/add2cart" method="POST">
+          <input type="hidden" name="txtID" value="<%= products._id %>" />
+          Report: <input type="text" name="txtQuantity" /><br />
+          <input type="submit" value="FEEDBACK" />
+        </form>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>

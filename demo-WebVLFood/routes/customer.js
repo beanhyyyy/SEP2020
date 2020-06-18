@@ -3,19 +3,60 @@ var router = express.Router();
 // daos
 var ProductsDAO = require('../daos/ProductsDAO.js');
 var OrderDAO = require('../daos/OrderDAO.js');
+var CustomersDAO = require('../daos/CustomersDAO.js');
 // routes
 router.get('/', function (req, res) {
   res.redirect('/home');
 });
-router.get('/home', async function (req, res) {
-  var products = await ProductsDAO.getAll();
-  res.render('customer/home.ejs', { products: products });
+router.get('/home', function (req, res) {
+  res.render('customer/home.ejs');
 });
-router.get('/viewproducts/:id', async function (req, res) {
+
+router.get('/customer/viewProducts', async function (req, res) {
+  var products = await ProductsDAO.getAll();
+  res.render('customer/viewProducts.ejs', { products: products });
+});
+router.get('/detailProducts/:id', async function (req, res) {
   var id = req.params.id;
   var products = await ProductsDAO.getDetails(id);
-  res.render('customer/viewproducts.ejs', { products: products });
+  res.render('customer/detailProducts.ejs', { products: products });
 });
+
+
+router.get('/customer/addCustomers', function (req, res) {
+  res.render('customer/addCustomers.ejs');
+});
+
+// router.post('/addCustomers', upload.single('fileImage'), async function (req, res) {
+//   var name = req.body.txtName;
+//   var phone = parseInt(req.body.txtPhone);
+//   var gmail = req.body.txtGmail;
+
+//   if (req.file) {
+//     var image = req.file.buffer.toString('base64');
+//     var customers = { name: name, phone: phone, gmail: gmail, image: image };
+//     var result = await CustomersDAO.insert(customers);
+//     if (result) {
+//       res.send('OK BABY!');
+//     } else {
+//       res.send('SORRY BABY!');
+//     }
+//   } else {
+//     var customers = { name: name, phone: phone, gmail: gmail };
+//     var result = await CustomersDAO.insert(customers);
+//     if (result) {
+//       res.send('OK BABY!');
+//     } else {
+//       res.send('SORRY BABY!');
+//     }
+//   }
+// });
+
+router.get('/customer/viewTeams', function (req, res) {
+  res.render('customer/viewTeams.ejs');
+});
+
+
 router.post('/add2cart', async function (req, res) {
   var id = req.body.txtID;
   var products = await ProductsDAO.getDetails(id);
@@ -41,13 +82,13 @@ router.post('/add2cart', async function (req, res) {
   for (var item of req.session.mycart) {
     console.log(item.product.name + " | " + item.quantity);
   }*/
-  res.redirect('/home');
+  res.redirect('/customer/viewProducts');
 });
 router.get('/mycart', function (req, res) {
   if (req.session.mycart && req.session.mycart.length > 0) {
     res.render('customer/mycart.ejs');
   } else {
-    res.redirect('/home');
+    res.redirect('/customer/viewProducts');
   }
 });
 router.get('/remove2cart/:id', function (req, res) {
@@ -66,7 +107,7 @@ router.get('/checkout', function (req, res) {
   if (req.session.mycart && req.session.mycart.length > 0) {
     res.render('customer/checkout.ejs');
   } else {
-    res.redirect('/home');
+    res.redirect('/customer/viewProducts');
   }
 });
 router.post('/checkout', async function (req, res) {
@@ -82,7 +123,7 @@ router.post('/checkout', async function (req, res) {
   var result = await OrderDAO.insert(order);
   if (result) {
     delete req.session.mycart;
-    res.redirect('/home');
+    res.redirect('/customer/viewProducts');
   } else {
     res.redirect('/mycart');
   }

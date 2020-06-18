@@ -6,28 +6,24 @@
         <th>ID</th>
         <th>Name</th>
         <th>Image</th>
-        <th>Price</th>
+        <th>Description</th>
         <th>Quantity</th>
-        <th>Amount</th>
-        <th>Action</th>
       </tr>
-      <% 
+      <!-- <% 
         var total = 0;
         for (var item of session.mycart) {
           total += item.products.price * item.quantity;
-      %>
+      %> -->
       <tr>
         <td><%= item.products._id %></td>
         <td><%= item.products.name %></td>
         <td><img src="data:image/jpg;base64,<%= item.products.image %>" width="70" height="70" /></td>
-        <td><%= item.products.price %></td>
+        <td><%= item.products.description %></td>
         <td><%= item.quantity %></td>
-        <td><%= item.products.price * item.quantity %></td>
         <td><a href="/remove2cart/<%= item.products._id %>">Remove</a></td>
       </tr>
       <%  } %>
     </table>
-    <h3>Total = <%= total %></h3>
     <a href="/checkout">CHECKOUT</a>
   </body>
 </html>
