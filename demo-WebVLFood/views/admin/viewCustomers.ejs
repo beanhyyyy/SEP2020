@@ -1,0 +1,27 @@
+<htm>
+  <body>
+    <h1>CUSTOMER LIST</h1>
+    <table border="1">
+      <tr>
+        <th>CustName</th>
+        <th>CustPhone</th>
+        <th>DateTime</th>
+      </tr>
+      <%  for (var item of customers) { %>
+      <tr>
+        <!-- <td>
+          <a href="/admin/customers?id=<%= item._id %>">
+            <%= item._id %>
+          </a>
+        </td> -->
+        <td><%= item.txtName %></td>
+        <td><%= item.txtPhone %></td>
+        <td><%= new Date(item.datetime).toLocaleString() %></td>
+        
+      </tr>
+      <% } %>
+    </table>
+
+    
+  </body>
+</htm>

@@ -37,6 +37,11 @@ router.get('/home', function (req, res) {
   }
 });
 
+router.get('/admin/viewCustomers', async function (req, res) {
+  var customer = await CustomersDAO.getAll();
+  res.render('customer/viewProducts.ejs', { customers: customers });
+});
+
 router.get('/addCustomers', function (req, res) {
   res.render('admin/addCustomers.ejs');
 });

@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+// middleware
+var multer = require('multer');
+var upload = multer({});
 // daos
 var ProductsDAO = require('../daos/ProductsDAO.js');
 var OrderDAO = require('../daos/OrderDAO.js');
@@ -27,30 +30,30 @@ router.get('/customer/addCustomers', function (req, res) {
   res.render('customer/addCustomers.ejs');
 });
 
-// router.post('/addCustomers', upload.single('fileImage'), async function (req, res) {
-//   var name = req.body.txtName;
-//   var phone = parseInt(req.body.txtPhone);
-//   var gmail = req.body.txtGmail;
+router.post('/addCustomers', upload.single('fileImage'), async function (req, res) {
+  var name = req.body.txtName;
+  var phone = parseInt(req.body.txtPhone);
+  var gmail = req.body.txtGmail;
 
-//   if (req.file) {
-//     var image = req.file.buffer.toString('base64');
-//     var customers = { name: name, phone: phone, gmail: gmail, image: image };
-//     var result = await CustomersDAO.insert(customers);
-//     if (result) {
-//       res.send('OK BABY!');
-//     } else {
-//       res.send('SORRY BABY!');
-//     }
-//   } else {
-//     var customers = { name: name, phone: phone, gmail: gmail };
-//     var result = await CustomersDAO.insert(customers);
-//     if (result) {
-//       res.send('OK BABY!');
-//     } else {
-//       res.send('SORRY BABY!');
-//     }
-//   }
-// });
+  if (req.file) {
+    var image = req.file.buffer.toString('base64');
+    var customers = { name: name, phone: phone, gmail: gmail, image: image };
+    var result = await CustomersDAO.insert(customers);
+    if (result) {
+      res.send('OK BABY!');
+    } else {
+      res.send('SORRY BABY!');
+    }
+  } else {
+    var customers = { name: name, phone: phone, gmail: gmail };
+    var result = await CustomersDAO.insert(customers);
+    if (result) {
+      res.send('OK BABY!');
+    } else {
+      res.send('SORRY BABY!');
+    }
+  }
+});
 
 router.get('/customer/viewTeams', function (req, res) {
   res.render('customer/viewTeams.ejs');
