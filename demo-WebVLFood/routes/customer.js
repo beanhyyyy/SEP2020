@@ -45,7 +45,7 @@ router.post('/addCustomers', upload.single('fileImage'), async function (req, re
       res.send('SORRY BABY!');
     }
   } else {
-    var customers = { name: name, phone: phone, gmail: gmail };
+    var customers = { name: name, phone: phone, gmail: gmail, image: image };
     var result = await CustomersDAO.insert(customers);
     if (result) {
       res.send('OK BABY!');

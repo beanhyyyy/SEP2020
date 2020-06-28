@@ -1,32 +1,48 @@
 <html>
   <body>
-    <form action="addCustomers" method="POST" enctype="multipart/form-data">
-      <table>
-        <tr>
-          <td>Name</td>
-          <td><input type="text" name="txtName" /></td>
-        </tr>
-        <tr>
-          <td>Phone</td>
-          <td><input type="text" name="txtPhone" /></td>
-        </tr>
-        <tr>
-          <td>Description</td>
-          <td><input type="text" name="txtDescription" /></td>
-        </tr>
-        <tr>
-          <td>Slot</td>
-          <td><input type="text" name="txtSlot" /></td>
-        </tr>
-        <tr>
-          <td>Image</td>
-          <td><input type="file" name="fileImage" /></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><input type="submit" value="ADD NEW" /></td>
-        </tr>
-      </table>
-    </form>
+    <h1></h1>
+    <section class="table-area section-padding">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="section-top2 text-center">
+                      <h3><span>Yours</span> Name <span>Phone</span> Description <span>Image</span></h3>
+                      <p><i>We will contact you soon</i></p>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-8 offset-lg-2">
+                <form action="addCustomers" method="POST" enctype="multipart/form-data">
+                  <table align="center" class="table table-bordered">
+                    <tr>
+                      <td class="section-top2 text-center"><span>Name</span></td>
+                      <td><input type="text" name="txtName" /></td>
+                    </tr>
+                    <tr>
+                      <td class="section-top2 text-center"><span>Phone</span></td>
+                      <td><input type="text" name="txtPhone" /></td>
+                    </tr>
+                    <tr>
+                      <td class="section-top2 text-center"><span>Gmail</span></td>
+                      <td><input type="text" name="txtGmail" /></td>
+                    </tr>
+                    <tr>
+                      <td class="section-top2 text-center"><span>Image</span></td>
+                      <td><input type="file" name="fileImage" /></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><input type="submit" value="ADD NEW" class="template-btn"/></td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+          </div>
+      </div>
+  </section>
   </body>
+
+  
 </html>

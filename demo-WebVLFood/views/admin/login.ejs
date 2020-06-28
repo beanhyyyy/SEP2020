@@ -1,12 +1,26 @@
 <html>
 
 <body>
-  <h1>LOGIN</h1>
-  <form action="/admin/login" method="POST">
-    Username: <input type="text" name="txtUsername" /><br />
-    Password: <input type="password" name="txtPassword" /><br />
-    <input type="submit" value="LOGIN" />
-  </form>
+  <h1></h1>
+  <table align="center" class="table table-bordered">
+    <form action="/admin/login" method="POST">
+      <table align="center" class="table table-bordered">
+        <tr>
+          <td class="section-top2 text-center"><span>Username</span></td>
+          <td><input type="text" name="txtUsername" /></td>
+        </tr>
+        <tr>
+          <td class="section-top2 text-center"><span>Password</span></td>
+          <td><input type="password" name="txtPassword" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" value="LOGIN" class="template-btn"/></td>
+        </tr>
+      </table>
+    </form>
+  </table>
+  
 </body>
 
 </html>

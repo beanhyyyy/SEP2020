@@ -2,17 +2,10 @@
 
   <body>
     <div class="table-responsive" style="padding-right: 5px; padding-left: 5px;">
-       <td align="left">
-        <%  if (session.customer) {  %>
-        Hello <b><%=session.customer.name%></b> | <a href="./logout">Logout</a>
-        <%  } else {  %>
-        <a href="./login">Login</a> 
-        <%  } %>
-      </td> 
       <table align="center" class="table table-bordered">
         <tr>
           <td colspan="2" align="right">
-            <a href="/mycart" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-shopping-cart"></span> My
+            <a href="/mycart"><span class="glyphicon glyphicon-shopping-cart"></span> My
               Nontification</a> have
             <b><%= (session.mycart) ? session.mycart.length : 0 %></b> items
           </td>

@@ -4,10 +4,10 @@ var router = express.Router();
 var multer = require('multer');
 var upload = multer({});
 // daos
-var CustomersDAO = require('../daos/CustomersDAO.js');
 var ProductsDAO = require('../daos/ProductsDAO.js');
 var AdminDAO = require('../daos/AdminDAO.js');
 var OrderDAO = require('../daos/OrderDAO.js');
+var CustomersDAO = require('../daos/CustomersDAO.js');
 // routes
 router.get('/', function (req, res) {
   res.redirect('/admin/login');
@@ -37,9 +37,9 @@ router.get('/home', function (req, res) {
   }
 });
 
-router.get('/admin/viewCustomers', async function (req, res) {
-  var customer = await CustomersDAO.getAll();
-  res.render('customer/viewProducts.ejs', { customers: customers });
+router.get('/viewCustomers', async function (req, res) {
+  var customers = await CustomersDAO.getAll();
+  res.render('admin/viewCustomers.ejs', { customers: customers });
 });
 
 router.get('/addCustomers', function (req, res) {
@@ -61,7 +61,7 @@ router.post('/addCustomers', upload.single('fileImage'), async function (req, re
       res.send('SORRY BABY!');
     }
   } else {
-    var customers = { name: name, phone: phone, gmail: gmail };
+    var customers = { name: name, phone: phone, gmail: gmail, image: image };
     var result = await CustomersDAO.insert(customers);
     if (result) {
       res.send('OK BABY!');
